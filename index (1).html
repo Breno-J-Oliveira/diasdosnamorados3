@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Neon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      position: relative;
+    }
+
+    /* Vídeo de fundo */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -4;
+      filter: brightness(0.4) hue-rotate(300deg) saturate(1.3);
+    }
+
+    /* Luzes suaves tipo aurora boreal */
+    .aurora-overlay {
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at 25% 35%, rgba(255,182,193,0.3), transparent 60%),
+        radial-gradient(circle at 75% 25%, rgba(255,105,180,0.25), transparent 50%),
+        radial-gradient(circle at 50% 75%, rgba(255,192,203,0.25), transparent 60%);
+      mix-blend-mode: screen;
+      animation: auroraMove 30s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: -3;
+    }
+
+    @keyframes auroraMove {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translate(80px, -50px) scale(1.1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(-60px, 40px) scale(1);
+        opacity: 0.6;
+      }
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: -2;
+    }
+
+    /* Coração principal */
+    .main-heart {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      animation: pulse 2s infinite ease-in-out;
+      filter: drop-shadow(0 0 15px #ff00cc)
+              drop-shadow(0 0 30px #ff00cc);
+      z-index: 2;
+    }
+
+    /* Mensagem elegante */
+    .message {
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      color: #ffc4f0;
+      text-shadow: 0 0 8px #ff00cc, 0 0 16px #ff33dd;
+      animation: pulse 2s infinite ease-in-out;
+      z-index: 2;
+    }
+
+    /* Animação de pulsar */
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* Corações flutuando */
+    .floating-heart {
+      position: absolute;
+      animation: float 10s linear infinite, flicker 4s infinite;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(1); }
+      100% { transform: translateY(-20vh) scale(1.2); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      20%, 40%, 60% { opacity: 0.6; }
+      30%, 70% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Vídeo de fundo -->
+  <video autoplay muted loop id="bg-video">
+    <source src="file:///C:/Users/Dev_1o_Ano/Desktop/Diasdosnamorados/video.mp4" type="video/mp4">
+  </video>
+
+  <!-- Aurora suave -->
+  <div class="aurora-overlay"></div>
+
+  <div class="overlay"></div>
+
+  <!-- Coração central -->
+  <img src="file:///C:/Users/Dev_1o_Ano/Desktop/Diasdosnamorados/Imagem%20de%20fundo%20para%20tela%20de%20celular%20neon%20love.png" class="main-heart" alt="Coração Neon">
+
+  <!-- Mensagem abaixo do coração -->
+  <div class="message">Você é meu amor verdadeiro amor 💖</div>
+
+  <!-- Áudio -->
+  <audio autoplay loop>
+    <source src="file:///C:/Users/Dev_1o_Ano/Desktop/Diasdosnamorados/heartbeat-sound-effect-111218.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Corações flutuando -->
+  <script>
+    const totalHearts = 25;
+    const heartImages = [
+      "file:///C:/Users/Dev_1o_Ano/Desktop/Diasdosnamorados/Imagem%20de%20fundo%20para%20tela%20de%20celular%20neon%20love.png",
+      "file:///C:/Users/Dev_1o_Ano/Desktop/Diasdosnamorados/1.png",
+      "file:///C:/Users/Dev_1o_Ano/Desktop/Diasdosnamorados/2.png"
+    ];
+
+    for (let i = 0; i < totalHearts; i++) {
+      const heart = document.createElement('img');
+      const randomImage = heartImages[Math.floor(Math.random() * heartImages.length)];
+      heart.src = randomImage;
+      heart.classList.add('floating-heart');
+      heart.style.width = Math.floor(Math.random() * 40 + 20) + 'px';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = Math.random() * 100 + 'vh';
+      heart.style.animationDelay = Math.random() * 10 + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+</body>
+</html>
